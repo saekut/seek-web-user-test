@@ -161,7 +161,7 @@
       b.type = "button";
       b.className = "device-option";
       b.dataset.key = k;
-      b.innerHTML = `<span class="device-icon">${k === "mobile" ? "📱" : "💻"}</span>
+      b.innerHTML = `<span class="device-icon">${icon(k === "mobile" ? "phone" : "laptop")}</span>
         <span class="device-name">${S.devices[k].label}</span>
         ${k === pick ? '<span class="device-tag">matches your device</span>' : ""}`;
       b.addEventListener("click", () => select(k));

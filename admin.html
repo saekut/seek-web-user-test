@@ -13,13 +13,14 @@
   <!-- Login -->
   <section id="a-login" class="card-view" hidden>
     <div class="card">
-      <p class="eyebrow">Admin</p>
+      <div class="login-mark" id="login-mark"></div>
       <h1>SEEk Web User Test</h1>
+      <p class="muted login-sub">Sign in to manage your user tests</p>
       <form id="login-form">
         <label class="field"><span>Email</span><input type="email" name="email" required autocomplete="username" /></label>
         <label class="field"><span>Password</span><input type="password" name="password" required autocomplete="current-password" /></label>
         <p class="warn-text" id="login-error" hidden></p>
-        <button class="btn primary wide" type="submit">Log in</button>
+        <button class="btn primary wide" type="submit">Sign In</button>
       </form>
       <p class="small center" style="margin-top:14px"><a href="#" id="forgot-link">Forgot password?</a></p>
       <p class="muted small center" id="demo-hint" hidden>Demo mode (no database connected yet): use any email and the password <b>admin</b>.</p>
@@ -42,6 +43,7 @@
   <!-- Not an admin -->
   <section id="a-denied" class="card-view" hidden>
     <div class="card center">
+      <div class="login-mark" style="background:#ff9500" id="denied-mark"></div>
       <h2>No admin access</h2>
       <p class="muted">You're logged in, but this account isn't an admin.</p>
       <button class="btn ghost wide" id="denied-logout">Log out</button>
@@ -51,10 +53,10 @@
   <!-- App -->
   <div id="a-app" hidden>
     <header class="a-top">
-      <a href="#tests" class="a-brand">SEEk Web User Test <span>Admin</span></a>
+      <a href="#tests" class="a-brand"><span class="a-brand-mark" id="brand-mark"></span>SEEk Web User Test <span>Admin</span></a>
       <span class="pill prog" id="mode-badge" hidden>Demo mode</span>
       <div class="a-top-right">
-        <span class="muted small" id="who"></span>
+        <span class="muted small" id="who"></span><span class="a-avatar" id="avatar"></span>
         <button class="btn ghost small-btn dark" id="logout">Log out</button>
       </div>
     </header>
@@ -65,6 +67,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <script src="js/config.js"></script>
+  <script src="js/icons.js"></script>
   <script src="js/demo-study.js"></script>
   <script src="js/db.js"></script>
   <script src="js/results.js"></script>

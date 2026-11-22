@@ -247,7 +247,7 @@ window.Results = (function () {
       return `<tr class="tester-row" data-i="${i}">
           <td><b>${esc(s.details?.name || "—")}</b>${s.completed ? "" : ' <span class="pill prog">unfinished</span>'}</td>
           ${fieldCols.map(f => `<td>${esc(s.details?.[f.id] || "–")}</td>`).join("")}
-          <td>${s.device === "mobile" ? "📱 Phone" : "💻 Computer"}</td>
+          <td style="white-space:nowrap">${s.device === "mobile" ? icon("phone") + " Phone" : icon("laptop") + " Computer"}</td>
           <td>${date.toLocaleDateString()} ${date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</td>
           ${cells}
           <td class="num">${fmtTime(total)}</td>

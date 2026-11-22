@@ -59,6 +59,10 @@
     ["a-login", "a-newpass", "a-denied", "a-app"].forEach(x => ($(x).hidden = x !== id));
   }
 
+  $("login-mark").innerHTML = icon("tap");
+  $("brand-mark").innerHTML = icon("tap");
+  $("denied-mark").innerHTML = icon("lock");
+
   async function boot() {
     if (window.DB_ERROR) { showOnly("a-login"); $("login-error").hidden = false; $("login-error").textContent = window.DB_ERROR; return; }
     $("demo-hint").hidden = DB.mode !== "local";
@@ -69,6 +73,7 @@
     if (!user) return showOnly("a-login");
     if (!(await DB.isAdmin())) return showOnly("a-denied");
     $("who").textContent = user.email || "";
+    $("avatar").textContent = (user.email || "?").slice(0, 1);
     showOnly("a-app");
     route();
   }
@@ -77,7 +82,7 @@
     e.preventDefault();
     const f = e.target, err = $("login-error");
     err.hidden = true;
-    const btn = f.querySelector("button"); btn.disabled = true; btn.textContent = "Logging in…";
+    const btn = f.querySelector("button"); btn.disabled = true; btn.textContent = "Signing in…";
     try {
       await DB.signIn(f.email.value.trim(), f.password.value);
       f.password.value = "";
@@ -85,7 +90,7 @@
     } catch (ex) {
       err.textContent = /invalid/i.test(errMsg(ex)) ? "Wrong email or password." : errMsg(ex);
       err.hidden = false;
-    } finally { btn.disabled = false; btn.textContent = "Log in"; }
+    } finally { btn.disabled = false; btn.textContent = "Sign In"; }
   });
   $("forgot-link").addEventListener("click", async (e) => {
     e.preventDefault();
@@ -135,7 +140,7 @@
   // ================================================================
   async function renderList() {
     main.innerHTML = `<div class="r-head"><div><p class="eyebrow">Dashboard</p><h1>User tests</h1></div>
-      <div class="r-actions"><button class="btn primary-solid" id="new-test">+ New user test</button></div></div>
+      <div class="r-actions"><button class="btn primary-solid" id="new-test">${icon("plus")} New Test</button></div></div>
       <div id="new-box" hidden></div>
       <div id="list"><div class="spinner"></div></div>`;
     $("new-test").addEventListener("click", () => openNewBox());
@@ -146,7 +151,7 @@
     window._studies = studies;
 
     if (!studies.length) {
-      $("list").innerHTML = `<div class="panel empty">No user tests yet. Click <b>+ New user test</b> to make one.</div>`;
+      $("list").innerHTML = `<div class="panel empty-state"><div class="empty-icon">${icon("grid")}</div><h2>No user tests yet</h2><p class="muted">Click <b>New Test</b> to make your first one.</p></div>`;
       return;
     }
     $("list").innerHTML = `<div class="study-grid">${studies.map(s => {
@@ -156,29 +161,29 @@
       return `<article class="study-card" data-id="${esc(s.id)}">
         <div class="study-top">
           <span class="pill st-${s.status}">${STATUS[s.status]}</span>
-          ${s.is_default ? `<span class="pill default" title="The plain site link opens this test">★ Main link</span>` : ""}
+          ${s.is_default ? `<span class="pill default" title="The plain site link opens this test">${icon("star")} Main link</span>` : ""}
         </div>
         <h3>${esc(s.title)}</h3>
         <p class="muted small">${nTasks} task${nTasks === 1 ? "" : "s"} · ${nScreens} screen${nScreens === 1 ? "" : "s"} · updated ${fmtDate(s.updated_at)}</p>
         <div class="study-stats"><div><b>${c.total}</b><span>testers</span></div><div><b>${c.completed}</b><span>finished</span></div></div>
         <div class="study-actions">
-          <a class="btn primary-solid" href="#results/${encodeURIComponent(s.id)}">Results</a>
-          <a class="btn" href="#edit/${encodeURIComponent(s.id)}">Edit</a>
-          <button class="btn" data-act="copy">Copy link</button>
-          <button class="btn" data-act="more" aria-haspopup="true">More ▾</button>
+          <a class="btn primary-solid" href="#results/${encodeURIComponent(s.id)}">${icon("chart")} Results</a>
+          <a class="btn" href="#edit/${encodeURIComponent(s.id)}">${icon("edit")} Edit</a>
+          <button class="btn" data-act="copy">${icon("link")} Copy Link</button>
+          <button class="btn icon-only" data-act="more" aria-haspopup="true" title="More">${icon("more")}</button>
         </div>
         <div class="more-menu" hidden>
           <label class="menu-row">Status
             <select data-act="status">${Object.entries(STATUS).map(([k, v]) => `<option value="${k}" ${k === s.status ? "selected" : ""}>${v}</option>`).join("")}</select>
           </label>
-          ${s.is_default ? "" : `<button class="menu-btn" data-act="default">★ Use as main link</button>`}
-          <a class="menu-btn" href="${s.status === "live" ? testerLink(s.id, false) : testerLink(s.id, false) + "&preview=1"}" target="_blank" rel="noopener">${s.status === "live" ? "Open tester page ↗" : "Preview (not saved) ↗"}</a>
-          <button class="menu-btn" data-act="dup">Duplicate</button>
-          <button class="menu-btn danger" data-act="delete">Delete test + results</button>
+          ${s.is_default ? "" : `<button class="menu-btn" data-act="default">${icon("star")} Use as main link</button>`}
+          <a class="menu-btn" href="${s.status === "live" ? testerLink(s.id, false) : testerLink(s.id, false) + "&preview=1"}" target="_blank" rel="noopener">${s.status === "live" ? icon("external") + " Open tester page" : icon("eye") + " Preview (not saved)"}</a>
+          <button class="menu-btn" data-act="dup">${icon("duplicate")} Duplicate</button>
+          <button class="menu-btn danger" data-act="delete">${icon("trash")} Delete test + results</button>
         </div>
       </article>`;
     }).join("")}</div>
-    <p class="muted small" style="margin-top:18px">Only <b>Live</b> tests can be opened by testers. The test marked <b>★ Main link</b> opens from the plain site address: <a href="${testerLink("", true)}" target="_blank" rel="noopener">${esc(testerLink("", true))}</a></p>`;
+    <p class="site-link">Only <b>Live</b> tests can be opened by testers. The test marked <b>Main link</b> opens from the plain site address: <a href="${testerLink("", true)}" target="_blank" rel="noopener">${esc(testerLink("", true))}</a></p>`;
 
     $("list").querySelectorAll(".study-card").forEach(card => {
       const s = studies.find(x => x.id === card.dataset.id);
@@ -219,7 +224,7 @@
           ${studies.map(s => `<option value="copy:${esc(s.id)}">Copy of “${esc(s.title)}”</option>`).join("")}
         </select></label>
       </div>
-      <div class="r-actions"><button class="btn primary-solid" id="nt-create">Create</button><button class="btn" id="nt-cancel">Cancel</button></div>
+      <div class="r-actions"><button class="btn primary-solid" id="nt-create">Create Test</button><button class="btn" id="nt-cancel">Cancel</button></div>
     </div>`;
     $("nt-title").focus();
     $("nt-cancel").onclick = () => (box.hidden = true);
@@ -274,15 +279,15 @@
     if (!study) { main.innerHTML = `<p class="empty">That test doesn't exist. <a href="#tests">Back to tests</a></p>`; return; }
     const cfg = { ...study.config, title: study.title };
 
-    main.innerHTML = `<p class="crumb"><a href="#tests">← All user tests</a></p>
+    main.innerHTML = `<p class="crumb"><a href="#tests">${icon("back")} All Tests</a></p>
       <div class="r-head">
         <div><p class="eyebrow">Results · <span class="pill st-${study.status}">${STATUS[study.status]}</span></p><h1>${esc(study.title)}</h1></div>
         <div class="r-actions">
-          <button class="btn" id="r-refresh">Refresh</button>
-          <button class="btn" id="r-csv">Download CSV</button>
-          <button class="btn" id="r-json">Download JSON</button>
-          <a class="btn" href="#edit/${encodeURIComponent(id)}">Edit test</a>
-          <button class="btn danger" id="r-clear">Delete all results</button>
+          <button class="btn" id="r-refresh">${icon("refresh")} Refresh</button>
+          <button class="btn" id="r-csv">${icon("download")} CSV</button>
+          <button class="btn" id="r-json">${icon("download")} JSON</button>
+          <a class="btn" href="#edit/${encodeURIComponent(id)}">${icon("edit")} Edit</a>
+          <button class="btn danger" id="r-clear">${icon("trash")} Delete All</button>
         </div>
       </div>
       <div id="r-body"></div>`;
@@ -322,19 +327,19 @@
     ed = { row: { ...row }, cfg, tab: ed && ed.row.id === id ? ed.tab : "basics", device: firstDev, screenId: null, hotspotIdx: -1, resultCount: sessions.length };
     dirty = false;
 
-    main.innerHTML = `<p class="crumb"><a href="#tests">← All user tests</a></p>
+    main.innerHTML = `<p class="crumb"><a href="#tests">${icon("back")} All Tests</a></p>
       <div class="r-head">
-        <div><p class="eyebrow">Edit user test</p><h1 id="ed-title"></h1></div>
+        <div><p class="eyebrow">Edit Test</p><h1 id="ed-title"></h1></div>
         <div class="r-actions">
-          <a class="btn" id="ed-preview" target="_blank" rel="noopener">Preview ↗</a>
-          <a class="btn" href="#results/${encodeURIComponent(id)}">Results (${sessions.length})</a>
+          <a class="btn" id="ed-preview" target="_blank" rel="noopener">${icon("eye")} Preview</a>
+          <a class="btn" href="#results/${encodeURIComponent(id)}">${icon("chart")} Results (${sessions.length})</a>
         </div>
       </div>
       ${sessions.length ? `<div class="r-note">This test already has <b>${sessions.length}</b> tester result${sessions.length === 1 ? "" : "s"}. Changing screens, hotspots or tasks can make older results harder to compare — for a big change, use <b>Duplicate</b> and start a new round instead.</div>` : ""}
       <nav class="ed-tabs" id="ed-tabs">
         <button data-tab="basics">Basics</button>
-        <button data-tab="fields">Tester details</button>
-        <button data-tab="screens">Screens &amp; hotspots</button>
+        <button data-tab="fields">Tester Details</button>
+        <button data-tab="screens">Screens &amp; Hotspots</button>
         <button data-tab="tasks">Tasks</button>
         <button data-tab="json">Advanced</button>
       </nav>
@@ -433,7 +438,7 @@
     body.innerHTML = `<div class="panel">
       <p class="muted small" style="margin-top:0">What testers fill in before starting. Keep one field with the ID <b>name</b> — it's used to label testers in results.</p>
       <div id="f-list" class="rows"></div>
-      <button class="btn" id="f-add">+ Add question</button>
+      <button class="btn add-btn" id="f-add">${icon("plus")} Add Question</button>
     </div>`;
     const list = $("f-list");
     list.innerHTML = f.map((x, i) => `<div class="row-card" data-i="${i}">
@@ -471,9 +476,9 @@
 
   function rowTools(i, n) {
     return `<span class="tools">
-      <button class="icon-btn" data-move="-1" ${i === 0 ? "disabled" : ""} title="Move up">↑</button>
-      <button class="icon-btn" data-move="1" ${i === n - 1 ? "disabled" : ""} title="Move down">↓</button>
-      <button class="icon-btn danger" data-remove title="Remove">✕</button></span>`;
+      <button class="icon-btn" data-move="-1" ${i === 0 ? "disabled" : ""} title="Move up">${icon("up")}</button>
+      <button class="icon-btn" data-move="1" ${i === n - 1 ? "disabled" : ""} title="Move down">${icon("down")}</button>
+      <button class="icon-btn danger" data-remove title="Remove">${icon("trash")}</button></span>`;
   }
   function bindRowTools(card, arr, i, rerender) {
     card.querySelectorAll("[data-move]").forEach(b => b.addEventListener("click", () => {
@@ -501,7 +506,7 @@
       <p class="muted small" style="margin-top:0">Each task ends successfully when the tester reaches its <b>goal screen</b>. If you test both phone and computer, use the same screen ID in both so one goal works for both.</p>
       ${screens.size ? "" : `<p class="warn-text">Add screens first (Screens &amp; hotspots tab) so you can pick goal screens.</p>`}
       <div id="t-list" class="rows"></div>
-      <button class="btn" id="t-add">+ Add task</button>
+      <button class="btn add-btn" id="t-add">${icon("plus")} Add Task</button>
     </div>`;
     const opts = (sel) => `<option value="">— pick goal screen —</option>` + [...screens.entries()].map(([id, v]) =>
       `<option value="${esc(id)}" ${id === sel ? "selected" : ""}>${esc(v.name)} (${esc(id)})${devCount > 1 && v.devs.length < devCount ? " — " + v.devs.join("/") + " only" : ""}</option>`).join("");
@@ -533,7 +538,7 @@
       <p class="muted small" style="margin-top:0">The whole test setup as JSON. Only edit this if you know what you're changing.</p>
       <textarea id="j-text" class="code" rows="24" spellcheck="false"></textarea>
       <p class="warn-text" id="j-err" hidden></p>
-      <div class="r-actions"><button class="btn primary-solid" id="j-apply">Apply JSON</button></div>
+      <div class="r-actions" style="margin-top:12px"><button class="btn primary-solid" id="j-apply">Apply JSON</button></div>
     </div>`;
     $("j-text").value = JSON.stringify(ed.cfg, null, 2);
     $("j-apply").onclick = () => {
@@ -556,14 +561,14 @@
 
     body.innerHTML = `<div class="panel">
       <div class="dev-tabs">
-        ${["mobile", "desktop"].map(k => `<button data-dev="${k}" class="${k === dev ? "on" : ""}">${k === "mobile" ? "📱" : "💻"} ${DEVICE_LABEL[k]} ${devs[k] ? `<span class="muted">(${devs[k].screens.length})</span>` : `<span class="muted">(off)</span>`}</button>`).join("")}
+        ${["mobile", "desktop"].map(k => `<button data-dev="${k}" class="${k === dev ? "on" : ""}">${icon(k === "mobile" ? "phone" : "laptop")} ${DEVICE_LABEL[k]} <span class="muted">${devs[k] ? devs[k].screens.length : "off"}</span></button>`).join("")}
       </div>
-      ${!d ? `<div class="empty">The ${DEVICE_LABEL[dev].toLowerCase()} version is off — testers won't be offered it.<br><br><button class="btn primary-solid" id="dev-on">Turn on ${DEVICE_LABEL[dev]} version</button></div>` : `
+      ${!d ? `<div class="empty-state"><div class="empty-icon">${icon(dev === "mobile" ? "phone" : "laptop")}</div><h2>${DEVICE_LABEL[dev]} version is off</h2><p class="muted">Testers won't be offered it.</p><button class="btn primary-solid" id="dev-on">Turn On ${DEVICE_LABEL[dev]} Version</button></div>` : `
       <div class="scr-layout">
         <aside class="scr-list">
           <div class="scr-list-head">
             <b>Screens</b>
-            <label class="btn small-solid">+ Upload<input type="file" id="up" accept="image/*" multiple hidden /></label>
+            <label class="btn small-solid">${icon("upload")} Upload<input type="file" id="up" accept="image/*" multiple hidden /></label>
           </div>
           <p class="muted tiny">Export frames from Figma as PNG (1x or 2x) and upload them. The ★ screen is where every task starts.</p>
           <div id="scr-items">${screens.map(s => `
@@ -573,7 +578,7 @@
             </div>`).join("") || `<p class="muted small">No screens yet — upload some.</p>`}</div>
           <div class="dev-off">${Object.keys(devs).length > 1 ? `<button class="btn link-danger" id="dev-off">Turn off ${DEVICE_LABEL[dev]} version</button>` : ""}</div>
         </aside>
-        <section class="scr-edit">${sc ? screenEditorHTML(sc, d) : `<div class="empty">Upload screens to start drawing hotspots.</div>`}</section>
+        <section class="scr-edit">${sc ? screenEditorHTML(sc, d) : `<div class="empty-state"><div class="empty-icon">${icon("upload")}</div><h2>No screens yet</h2><p class="muted">Upload your Figma frames to start drawing hotspots.</p></div>`}</section>
       </div>`}
     </div>`;
 
@@ -629,8 +634,8 @@
         <label class="field"><span>Screen name</span><input id="s-name" value="${esc(sc.name)}" /></label>
         <label class="field"><span>Screen ID</span><input id="s-id" value="${esc(sc.id)}" /></label>
         <div class="scr-btns">
-          <button class="btn" id="s-start" ${d.start === sc.id ? "disabled" : ""}>${d.start === sc.id ? "★ Start screen" : "Make start screen"}</button>
-          <label class="btn">Replace image<input type="file" id="s-replace" accept="image/*" hidden /></label>
+          <button class="btn" id="s-start" ${d.start === sc.id ? "disabled" : ""}>${icon("star")} ${d.start === sc.id ? "Start Screen" : "Make Start Screen"}</button>
+          <label class="btn">${icon("upload")} Replace Image<input type="file" id="s-replace" accept="image/*" hidden /></label>
           <button class="btn link-danger" id="s-del">Delete screen</button>
         </div>
       </div>
