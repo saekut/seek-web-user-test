@@ -6,7 +6,7 @@
 //  Leave both empty to run in local demo mode (data stays in this browser).
 // ============================================================
 window.SITE_CONFIG = {
-  SUPABASE_URL: "",
-  SUPABASE_ANON_KEY: "",
+  SUPABASE_URL: "https://leuevgzanvexalfzyola.supabase.co",
+  SUPABASE_ANON_KEY: "sb_publishable_r2GJ889OZz9-O9FncX7h_g_mrTz6yV5",
   SITE_NAME: "SEEk Web User Test",
 };
