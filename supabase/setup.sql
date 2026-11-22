@@ -76,6 +76,13 @@ revoke all on function public.set_default_study(text) from public;
 grant execute on function public.set_default_study(text) to authenticated;
 grant execute on function public.is_admin() to anon, authenticated;
 
+-- ---------- table access for the website (rows are still limited by the rules below) ----------
+grant usage on schema public to anon, authenticated;
+grant select on public.studies to anon, authenticated;
+grant insert, update, delete on public.studies to authenticated;
+grant select, delete on public.sessions to authenticated;
+grant select on public.admins to authenticated;
+
 -- ---------- row level security ----------
 alter table public.studies  enable row level security;
 alter table public.sessions enable row level security;
