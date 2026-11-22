@@ -113,7 +113,6 @@ body.admin { min-height: 100vh; }
 .row-grid .wide-col { grid-column: 1 / -1; }
 .row-grid .field { margin: 12px 0 4px; }
 .row-grid .check { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; align-self: end; padding-bottom: 12px; }
-.row-grid .check input { width: 18px; height: 18px; padding: 0; }
 @media (max-width: 700px) { .row-grid { grid-template-columns: 1fr; } }
 .row-tools { display: flex; justify-content: space-between; align-items: center; margin-top: 6px; }
 .icon-btn { width: 32px; height: 32px; border-radius: 50%; border: 0; background: #fff; color: var(--ink-2); cursor: pointer; display: grid; place-items: center; transition: background .12s; }
