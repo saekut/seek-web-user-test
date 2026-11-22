@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SEEk Web User Test</title>
+  <meta name="robots" content="noindex" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="tester">
+
+  <!-- 0. Loading / closed -->
+  <section id="view-loading" class="view card-view">
+    <div class="card center">
+      <div class="spinner"></div>
+      <p class="muted" id="loading-text">Loading the test…</p>
+    </div>
+  </section>
+
+  <!-- 1. Welcome + details -->
+  <section id="view-welcome" class="view card-view" hidden>
+    <div class="card">
+      <p class="eyebrow">User test</p>
+      <h1 id="study-title"></h1>
+      <p id="study-intro" class="muted"></p>
+      <form id="details-form" autocomplete="off"></form>
+    </div>
+  </section>
+
+  <!-- 2. Device -->
+  <section id="view-device" class="view card-view" hidden>
+    <div class="card">
+      <p class="eyebrow">Almost ready</p>
+      <h2>Which version do you want to test?</h2>
+      <p class="muted">We picked the one that matches your device, but you can change it.</p>
+      <div id="device-options" class="device-options"></div>
+      <button id="device-next" class="btn primary wide">Continue</button>
+    </div>
+  </section>
+
+  <!-- 3. Task intro -->
+  <section id="view-task-intro" class="view card-view" hidden>
+    <div class="card">
+      <p class="eyebrow" id="task-count"></p>
+      <h2 id="task-title"></h2>
+      <p class="task-prompt" id="task-prompt"></p>
+      <p class="muted small">Tap around the design like it's a real website. When you've done the task, it will move on by itself. If you get stuck, press "Give up" — that's useful for us too.</p>
+      <button id="task-start" class="btn primary wide">Start task</button>
+    </div>
+  </section>
+
+  <!-- 4. Testing -->
+  <section id="view-test" class="view" hidden>
+    <header class="taskbar">
+      <button id="taskbar-toggle" class="taskbar-text" aria-expanded="false">
+        <span class="taskbar-label" id="taskbar-count"></span>
+        <span class="taskbar-prompt" id="taskbar-prompt"></span>
+      </button>
+      <button id="give-up" class="btn ghost small-btn">Give up</button>
+    </header>
+    <div id="stage" class="stage">
+      <div id="viewport" class="viewport">
+        <div id="screen" class="screen">
+          <img id="screen-img" alt="" draggable="false" />
+        </div>
+      </div>
+    </div>
+    <div id="success-toast" class="toast" hidden>✓ Task complete!</div>
+  </section>
+
+  <!-- 5. Rating -->
+  <section id="view-rate" class="view card-view" hidden>
+    <div class="card">
+      <p class="eyebrow" id="rate-status"></p>
+      <h2 id="rate-question"></h2>
+      <div class="stars" id="stars" role="radiogroup"></div>
+      <p class="star-hint muted small" id="star-hint">Tap a star</p>
+      <label class="field">
+        <span>Anything confusing or helpful? (optional)</span>
+        <textarea id="rate-comment" rows="3"></textarea>
+      </label>
+      <button id="rate-next" class="btn primary wide" disabled>Next</button>
+    </div>
+  </section>
+
+  <!-- 6. Done -->
+  <section id="view-done" class="view card-view" hidden>
+    <div class="card">
+      <div id="final-form">
+        <p class="eyebrow">Last step</p>
+        <h2>Any final thoughts about the design?</h2>
+        <label class="field">
+          <span>Optional</span>
+          <textarea id="final-comment" rows="4"></textarea>
+        </label>
+        <button id="finish" class="btn primary wide">Finish</button>
+      </div>
+      <div id="thanks" hidden>
+        <div class="big-check">✓</div>
+        <h2>Thank you!</h2>
+        <p class="muted" id="thanks-text">Your answers have been saved. You can close this page now.</p>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/demo-study.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/tester.js"></script>
+</body>
+</html>

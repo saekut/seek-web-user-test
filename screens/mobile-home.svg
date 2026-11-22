@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="390" height="1320" viewBox="0 0 390 1320" font-family="Arial, Helvetica, sans-serif">
+<rect width="100%" height="100%" fill="#fff"/>
+<rect x="0" y="0" width="390" height="64" rx="8" fill="#f8f9fa"/>
+<rect x="16" y="14" width="90" height="36" rx="8" fill="#fff" stroke="#adb5bd" stroke-width="2"/>
+<text x="61.0" y="38.3" font-size="18" fill="#343a40" text-anchor="middle" font-weight="700">SEEk</text>
+<rect x="16" y="84" width="358" height="220" rx="8" fill="#e9ecef"/>
+<text x="195.0" y="198.9" font-size="14" fill="#868e96" text-anchor="middle">[ Hero image ]</text>
+<text x="16" y="340" font-size="22" fill="#343a40" text-anchor="start" font-weight="700">Save the Earth Explorium</text>
+<rect x="16" y="360" width="358" height="10" rx="5" fill="#e9ecef"/>
+<rect x="16" y="382" width="358" height="10" rx="5" fill="#e9ecef"/>
+<rect x="16" y="404" width="214.79999999999998" height="10" rx="5" fill="#e9ecef"/>
+<rect x="16" y="440" width="358" height="52" rx="8" fill="#fff" stroke="#343a40" stroke-width="2"/>
+<text x="195.0" y="471.6" font-size="16" fill="#343a40" text-anchor="middle">Explore exhibits</text>
+<rect x="16" y="506" width="358" height="52" rx="8" fill="#fff" stroke="#343a40" stroke-width="2"/>
+<text x="195.0" y="537.6" font-size="16" fill="#343a40" text-anchor="middle">Plan your visit</text>
+<text x="16" y="610" font-size="20" fill="#343a40" text-anchor="start" font-weight="700">What's on</text>
+<rect x="16" y="630" width="100" height="100" rx="8" fill="#e9ecef"/>
+<text x="66.0" y="684.2" font-size="12" fill="#868e96" text-anchor="middle">img</text>
+<rect x="130" y="644" width="244" height="10" rx="5" fill="#e9ecef"/>
+<rect x="130" y="666" width="244" height="10" rx="5" fill="#e9ecef"/>
+<rect x="130" y="688" width="146.4" height="10" rx="5" fill="#e9ecef"/>
+<rect x="16" y="750" width="100" height="100" rx="8" fill="#e9ecef"/>
+<text x="66.0" y="804.2" font-size="12" fill="#868e96" text-anchor="middle">img</text>
+<rect x="130" y="764" width="244" height="10" rx="5" fill="#e9ecef"/>
+<rect x="130" y="786" width="244" height="10" rx="5" fill="#e9ecef"/>
+<rect x="130" y="808" width="146.4" height="10" rx="5" fill="#e9ecef"/>
+<rect x="16" y="870" width="100" height="100" rx="8" fill="#e9ecef"/>
+<text x="66.0" y="924.2" font-size="12" fill="#868e96" text-anchor="middle">img</text>
+<rect x="130" y="884" width="244" height="10" rx="5" fill="#e9ecef"/>
+<rect x="130" y="906" width="244" height="10" rx="5" fill="#e9ecef"/>
+<rect x="130" y="928" width="146.4" height="10" rx="5" fill="#e9ecef"/>
+<rect x="16" y="1010" width="358" height="140" rx="8" fill="#f1f3f5"/>
+<text x="195.0" y="1050" font-size="18" fill="#343a40" text-anchor="middle" font-weight="700">Ready to visit?</text>
+<rect x="40" y="1070" width="310" height="56" rx="8" fill="#2f9e44"/>
+<text x="195.0" y="1103.6" font-size="16" fill="#fff" text-anchor="middle" font-weight="700">Book a visit</text>
+<rect x="0" y="1200" width="390" height="120" rx="8" fill="#f8f9fa"/>
+<rect x="16" y="1230" width="358" height="10" rx="5" fill="#e9ecef"/>
+<rect x="16" y="1252" width="358" height="10" rx="5" fill="#e9ecef"/>
+<rect x="16" y="1274" width="214.79999999999998" height="10" rx="5" fill="#e9ecef"/>
+</svg>

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1000" viewBox="0 0 1440 1000" font-family="Arial, Helvetica, sans-serif">
+<rect width="100%" height="100%" fill="#fff"/>
+<rect x="0" y="0" width="1440" height="80" rx="8" fill="#f8f9fa"/>
+<rect x="40" y="20" width="110" height="40" rx="8" fill="#fff" stroke="#adb5bd" stroke-width="2"/>
+<text x="95.0" y="47.0" font-size="20" fill="#343a40" text-anchor="middle" font-weight="700">SEEk</text>
+<rect x="880" y="20" width="140" height="40" rx="8" fill="#f8f9fa"/>
+<text x="950.0" y="45.6" font-size="16" fill="#343a40" text-anchor="middle">Exhibits</text>
+<rect x="1030" y="20" width="160" height="40" rx="8" fill="#f8f9fa"/>
+<text x="1110.0" y="45.6" font-size="16" fill="#343a40" text-anchor="middle">Plan your visit</text>
+<rect x="1220" y="18" width="180" height="44" rx="8" fill="#2f9e44"/>
+<text x="1310.0" y="45.6" font-size="16" fill="#fff" text-anchor="middle" font-weight="700">Book a visit</text>
+<text x="40" y="150" font-size="36" fill="#343a40" text-anchor="start" font-weight="700">Plan your visit</text>
+<rect x="40" y="190" width="440" height="320" rx="8" fill="#fff" stroke="#adb5bd" stroke-width="2"/>
+<text x="64" y="240" font-size="24" fill="#343a40" text-anchor="start" font-weight="700">Opening hours</text>
+<rect x="64" y="270" width="390" height="10" rx="5" fill="#e9ecef"/>
+<rect x="64" y="292" width="390" height="10" rx="5" fill="#e9ecef"/>
+<rect x="64" y="314" width="390" height="10" rx="5" fill="#e9ecef"/>
+<rect x="64" y="336" width="390" height="10" rx="5" fill="#e9ecef"/>
+<rect x="64" y="358" width="390" height="10" rx="5" fill="#e9ecef"/>
+<rect x="64" y="380" width="234.0" height="10" rx="5" fill="#e9ecef"/>
+<rect x="500" y="190" width="440" height="320" rx="8" fill="#fff" stroke="#adb5bd" stroke-width="2"/>
+<text x="524" y="240" font-size="24" fill="#343a40" text-anchor="start" font-weight="700">Tickets</text>
+<rect x="524" y="270" width="390" height="10" rx="5" fill="#e9ecef"/>
+<rect x="524" y="292" width="390" height="10" rx="5" fill="#e9ecef"/>
+<rect x="524" y="314" width="390" height="10" rx="5" fill="#e9ecef"/>
+<rect x="524" y="336" width="390" height="10" rx="5" fill="#e9ecef"/>
+<rect x="524" y="358" width="390" height="10" rx="5" fill="#e9ecef"/>
+<rect x="524" y="380" width="234.0" height="10" rx="5" fill="#e9ecef"/>
+<rect x="960" y="190" width="440" height="320" rx="8" fill="#fff" stroke="#adb5bd" stroke-width="2"/>
+<text x="984" y="240" font-size="24" fill="#343a40" text-anchor="start" font-weight="700">Getting here</text>
+<rect x="984" y="270" width="390" height="10" rx="5" fill="#e9ecef"/>
+<rect x="984" y="292" width="390" height="10" rx="5" fill="#e9ecef"/>
+<rect x="984" y="314" width="390" height="10" rx="5" fill="#e9ecef"/>
+<rect x="984" y="336" width="390" height="10" rx="5" fill="#e9ecef"/>
+<rect x="984" y="358" width="390" height="10" rx="5" fill="#e9ecef"/>
+<rect x="984" y="380" width="234.0" height="10" rx="5" fill="#e9ecef"/>
+<rect x="40" y="570" width="260" height="56" rx="8" fill="#2f9e44"/>
+<text x="170.0" y="603.6" font-size="16" fill="#fff" text-anchor="middle" font-weight="700">Book now</text>
+</svg>
